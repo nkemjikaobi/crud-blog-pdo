@@ -39,13 +39,13 @@ $sql = "CREATE TABLE users (
 // )";
 
 
-// if ($conn->query($sql) === TRUE) {
-//   echo "Table MyGuests created successfully";
-// } else {
-//   echo "Error creating table: " . $conn->error;
-// }
+if ($conn->query($sql) === TRUE) {
+  echo "Table MyGuests created successfully";
+} else {
+  echo "Error creating table: " . $conn->error;
+}
 
-// $conn->close();
+$conn->close();
 
 
 
