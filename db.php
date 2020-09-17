@@ -25,7 +25,7 @@ if(!$conn){
 //     password varchar(255) NOT NULL,
 //     isAdmin tinyint(1) DEFAULT '0' NOT NULL,
 //     created_at timestamp DEFAULT CURRENT_TIMESTAMP
-)";
+//)";
  $sql = "CREATE TABLE blogs (
      id int(255) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     title varchar(255) NOT NULL,
