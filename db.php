@@ -26,26 +26,26 @@ if(!$conn){
 //     isAdmin tinyint(1) DEFAULT '0' NOT NULL,
 //     created_at timestamp DEFAULT CURRENT_TIMESTAMP
 //)";
- $sql = "CREATE TABLE blogs (
-     id int(255) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    title varchar(255) NOT NULL,
-    body varchar(255) NOT NULL,
-     author varchar(255) NOT NULL,
-     image blob NOT NULL,
-     UserId int(255) NOT NULL,
-     category varchar(255) NOT NULL,
-     created_at timestamp DEFAULT CURRENT_TIMESTAMP,
-     FOREIGN KEY (UserId) REFERENCES users(id)
- )";
+//  $sql = "CREATE TABLE blogs (
+//      id int(255) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+//     title varchar(255) NOT NULL,
+//     body varchar(255) NOT NULL,
+//      author varchar(255) NOT NULL,
+//      image blob NOT NULL,
+//      UserId int(255) NOT NULL,
+//      category varchar(255) NOT NULL,
+//      created_at timestamp DEFAULT CURRENT_TIMESTAMP,
+//      FOREIGN KEY (UserId) REFERENCES users(id)
+//  )";
 
 
-if ($conn->query($sql) === TRUE) {
-  echo "Table MyGuests created successfully";
-} else {
-  echo "Error creating table: " . $conn->error;
-}
+// if ($conn->query($sql) === TRUE) {
+//   echo "Table MyGuests created successfully";
+// } else {
+//   echo "Error creating table: " . $conn->error;
+// }
 
-$conn->close();
+// $conn->close();
 
 
 
