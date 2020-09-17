@@ -17,26 +17,26 @@ if(!$conn){
     die("Database Connection Error");
 }
 
-$sql = "CREATE TABLE users (
-    id int(255) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    first_name varchar(255) NOT NULL,
-    last_name varchar(255) NOT NULL,
-    email varchar(255) NOT NULL,
-    password varchar(255) NOT NULL,
-    isAdmin tinyint(1) DEFAULT '0' NOT NULL,
-    created_at timestamp DEFAULT CURRENT_TIMESTAMP
-)";
-// $sql = "CREATE TABLE blogs (
+// $sql = "CREATE TABLE users (
 //     id int(255) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-//     title varchar(255) NOT NULL,
-//     body varchar(255) NOT NULL,
-//     author varchar(255) NOT NULL,
-//     image blob NOT NULL,
-//     UserId int(255) NOT NULL,
-//     category varchar(255) NOT NULL,
-//     created_at timestamp DEFAULT CURRENT_TIMESTAMP,
-//     FOREIGN KEY (UserId) REFERENCES users(id)
-// )";
+//     first_name varchar(255) NOT NULL,
+//     last_name varchar(255) NOT NULL,
+//     email varchar(255) NOT NULL,
+//     password varchar(255) NOT NULL,
+//     isAdmin tinyint(1) DEFAULT '0' NOT NULL,
+//     created_at timestamp DEFAULT CURRENT_TIMESTAMP
+)";
+ $sql = "CREATE TABLE blogs (
+     id int(255) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    title varchar(255) NOT NULL,
+    body varchar(255) NOT NULL,
+     author varchar(255) NOT NULL,
+     image blob NOT NULL,
+     UserId int(255) NOT NULL,
+     category varchar(255) NOT NULL,
+     created_at timestamp DEFAULT CURRENT_TIMESTAMP,
+     FOREIGN KEY (UserId) REFERENCES users(id)
+ )";
 
 
 if ($conn->query($sql) === TRUE) {
