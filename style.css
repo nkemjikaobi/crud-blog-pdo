@@ -20,3 +20,12 @@ header span{
 #title-head{
     font-size:26px !important;
 }
+.round{
+    border-radius: 40px;
+}
+h3{
+    text-align: center;
+}
+#log-out{
+    display:inline !important;
+}

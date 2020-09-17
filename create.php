@@ -1,8 +1,21 @@
 <?php
 
+error_reporting(E_ERROR | E_PARSE);
 //Include connection file
 include 'db.php';
 
+session_start();
+
+$id = $_SESSION['id'];
+
+
+//Get user details
+// $stmt = $conn->prepare("SELECT * FROM users where id='$id'");
+//                 $stmt->execute();
+//                 $result = $stmt->get_result();
+//                 while ($row = $result->fetch_assoc()) {
+
+//                 }
 
 //When the Create Post button is clicked
 if(isset($_POST['btn-create'])){
@@ -11,6 +24,8 @@ if(isset($_POST['btn-create'])){
     $title = $_POST['title'];
     $body = $_POST['body'];
     $author = $_POST['author'];
+    $category = $_POST['category'];
+    $user_id = $id;
 
     //Handle Image Upload
     $filename = $_FILES["image"]["name"]; 
@@ -23,8 +38,8 @@ if(isset($_POST['btn-create'])){
     }
 
     //Prepared Statement to store user inputs
-    $stmt = $conn->prepare("INSERT INTO posts(title,body,author,image) VALUES(?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $title, $body, $author, $filename);
+    $stmt = $conn->prepare("INSERT INTO blogs(title,body,author,UserId,category,image) VALUES(?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssss", $title, $body, $author,$user_id, $category, $filename);
     $output = $stmt->execute();
     $stmt->close();
 
@@ -87,6 +102,14 @@ if(isset($_POST['btn-create'])){
             <div class="form-group">
                 <label for="author">Author</label>
                 <input type="text" class="form-control" required  name="author" id="author" placeholder="Enter the author of the post">
+            </div>
+            <div class="form-group">
+                <label for="author">Category</label>
+                <select name="category" id="category" class='form-control'>
+                    <option value="Education">Education</option>
+                    <option value="Sport">Sport</option>
+                    <option value="Nature">Nature</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="image">Image</label>

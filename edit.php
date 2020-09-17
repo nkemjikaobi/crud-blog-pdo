@@ -1,5 +1,6 @@
 <?php
 
+error_reporting(E_ERROR | E_PARSE);
 //Include connection file
 include 'db.php';
 
@@ -14,7 +15,7 @@ $_SESSION['id'] =  $id;
 $sess_id = $_SESSION['id'];
 
 //Fetch post details associated with the id
-$stmt  =  $conn->prepare("SELECT * FROM posts where id = '$id'");
+$stmt  =  $conn->prepare("SELECT * FROM blogs where id = '$id'");
 $stmt->execute();
 $result = $stmt->get_result();
 while ($row = $result->fetch_assoc()){
@@ -22,6 +23,7 @@ while ($row = $result->fetch_assoc()){
     $body = $row['body'];
     $author = $row['author'];
     $image = $row['image'];
+    $category = $row['category'];
 }
 
 //When the save changes button is clicked
@@ -34,6 +36,7 @@ if(isset($_POST['btn-update'])){
     $title = $_POST['title'];
     $body = $_POST['body'];
     $author = $_POST['author'];
+    $category = $_POST['category'];
 
     //Handle Image Upload
     $filename = $_FILES["image"]["name"]; 
@@ -47,8 +50,8 @@ if(isset($_POST['btn-update'])){
     }
 
     //Prepared Statement to store user inputs
-    $stmt = $conn->prepare("UPDATE posts SET title = ? , body = ?, author = ? , image = ? WHERE id = ?");
-    $stmt->bind_param("sssss", $title, $body, $author, $filename, $id);
+    $stmt = $conn->prepare("UPDATE blogs SET title = ? , body = ?, author = ? , category = ?, image = ? WHERE id = ?");
+    $stmt->bind_param("ssssss", $title, $body, $author, $category, $filename, $id);
     $output = $stmt->execute();
     $stmt->close();
 
@@ -111,6 +114,15 @@ if(isset($_POST['btn-update'])){
             <div class="form-group">
                 <label for="author">Author</label>
                 <input type="text" class="form-control" required name="author" id="author"  value='<?php  echo $author; ?>'>
+            </div>
+            <div class="form-group">
+                <label for="author">Category</label>
+                <select name="category" id="category" class='form-control'>
+                    <option value="<?php  echo $category; ?>"><?php  echo $category; ?></option>
+                    <option value="Education">Education</option>
+                    <option value="Sport">Sport</option>
+                    <option value="Nature">Nature</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="image">Image</label>

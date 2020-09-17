@@ -3,8 +3,23 @@
 //Include connection file
 include 'db.php';
 
+error_reporting(E_ERROR | E_PARSE);
+
 //start session
 session_start();
+
+if($_SESSION['active'] == true){
+    $status = "<div class='container'>
+            <div class='alert alert-success'>
+            <a href='#' class='close' data-dismiss='alert' aria-label='close'></a>
+            <strong>Logged in as </strong>".$_SESSION['first_name'] .  ' ' .$_SESSION['last_name'].
+            "</div>
+            </div>";
+}
+
+if(isset($_POST['btn-logout'])){
+    session_destroy();
+}
 
 ?>
 
@@ -23,9 +38,20 @@ session_start();
         <header>
             <span>Nkemjika's Blog</span>
         </header>
-
-        <section class='mb-4'>
+        <section class='mb-4 row'>
+            <div class="col-md-9">
             <a href='create.php' class='btn btn-primary'>Create Post</a>
+            </div>
+            
+            <div class='col-md-3'>
+            <a href='signup.php' class='btn btn-outline-primary round'>SIGN UP</a>
+            <a href='signin.php' class='btn btn-info round'>SIGN IN</a>
+            <form id='log-out' action="" method='post'>
+                <a href='logout.php' name='btn-logout' class='btn btn-danger round'>SIGN OUT</a>
+            </form>
+            
+            </div>
+           
         </section>
 
         <?php
@@ -33,16 +59,19 @@ session_start();
                 echo $_SESSION['message'];
                 unset($_SESSION['message']);
                 }
+                if(isset($status)){
+                    echo $status;
+                    }
         ?>
 
         <section>
             <?php
-                //Prepared statement to get all posts
-                $stmt = $conn->prepare("SELECT * FROM posts ORDER BY id DESC");
+                //Prepared statement to get all blogs
+                $stmt = $conn->prepare("SELECT * FROM blogs ORDER BY id DESC");
                 $stmt->execute();
                 $result = $stmt->get_result();
 
-                //Loop through all the posts
+                //Loop through all the blogs
                 while ($row = $result->fetch_assoc()) {
             ?>
             <div class="card mt-4">
