@@ -6,6 +6,10 @@ include 'db.php';
 
 session_start();
 
+if($_SESSION['active'] != true){
+    header("location: signin.php");
+}
+
 $id = $_SESSION['id'];
 
 
